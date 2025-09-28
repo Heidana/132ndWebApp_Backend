@@ -1,0 +1,6 @@
+@_132ndWebsite.API_HostAddress = http://localhost:5273
+
+GET {{_132ndWebsite.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
