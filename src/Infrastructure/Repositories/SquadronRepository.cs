@@ -23,5 +23,11 @@ namespace _132ndWebsite.Infrastructure.Repositories
             // FindAsync is highly efficient for lookups by primary key
             return await _context.Squadrons.FindAsync(id);
         }
+        public async Task<Squadron> CreateAsync(Squadron squadron)
+            {
+                await _context.Squadrons.AddAsync(squadron);
+                await _context.SaveChangesAsync();
+                return squadron;
+            }
     }
 }

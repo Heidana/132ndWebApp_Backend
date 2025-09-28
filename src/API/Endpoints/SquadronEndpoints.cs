@@ -1,3 +1,4 @@
+using _132ndWebsite.Application.Dtos;
 using _132ndWebsite.Application.Interfaces;
 using _132ndWebsite.Core.Models;
 
@@ -27,6 +28,15 @@ public static class SquadronEndpoints
         .WithName("GetSquadronById")
         .Produces<Squadron>(StatusCodes.Status200OK)
         .Produces(StatusCodes.Status404NotFound);
+        
+        group.MapPost("/", async (ISquadronService squadronService, CreateSquadronDto squadronDto) =>
+        {
+            var createdSquadron = await squadronService.CreateSquadronAsync(squadronDto);
+            return Results.CreatedAtRoute("GetSquadronById", new { id = createdSquadron.Id }, createdSquadron);
+        })
+        .WithName("CreateSquadron")
+        .Produces<Squadron>(StatusCodes.Status201Created)
+        .Produces(StatusCodes.Status400BadRequest);
     }
 }
 

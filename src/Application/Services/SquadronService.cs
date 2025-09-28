@@ -1,3 +1,4 @@
+using _132ndWebsite.Application.Dtos;
 using _132ndWebsite.Application.Interfaces;
 using _132ndWebsite.Core.Models;
 using _132ndWebsite.Infrastructure.Repositories;
@@ -24,4 +25,9 @@ public class SquadronService : ISquadronService
         // Future business logic can go here
         return await _squadronRepository.GetByIdAsync(id);
     }
+    public async Task<Squadron> CreateSquadronAsync(CreateSquadronDto squadronDto)
+        {
+            var newSquadron = new Squadron(0, squadronDto.Name, squadronDto.Callsign);
+            return await _squadronRepository.CreateAsync(newSquadron);
+        }
 }
