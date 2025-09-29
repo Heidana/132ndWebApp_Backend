@@ -15,9 +15,13 @@ public class ApplicationDbContext : DbContext
 
         // Seed initial squadron data
         modelBuilder.Entity<Squadron>().HasData(
-            new Squadron(1, "494th vFighter Squadron", "The Panthers"),
-            new Squadron(2, "388th Fighter Squadron", "The Peregrines"),
-            new Squadron(3, "335th Special Operations Squadron", "Ravens")
+            new Squadron { Id = 1, Name = "494th vFighter Squadron", Callsign = "The Panthers" },
+            new Squadron { Id = 2, Name = "388th Fighter Squadron", Callsign = "The Peregrines" },
+            new Squadron { Id = 3, Name = "335th Special Operations Squadron", Callsign = "Ravens" }
         );
+        //     new Squadron(1, "494th vFighter Squadron", "The Panthers"),
+        //     new Squadron(2, "388th Fighter Squadron", "The Peregrines"),
+        //     new Squadron(3, "335th Special Operations Squadron", "Ravens")
+        // );
     }
 }
