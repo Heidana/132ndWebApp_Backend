@@ -28,10 +28,9 @@ namespace _132ndWebsite.Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return squadron;
         }
-        public async Task UpdateAsync(Squadron squadron)
+        public async Task<int> SaveChangesAsync()
         {
-            _context.Squadrons.Update(squadron);
-            await _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync();
         }
     }
 }

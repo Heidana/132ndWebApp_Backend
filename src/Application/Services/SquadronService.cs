@@ -27,7 +27,12 @@ public class SquadronService : ISquadronService
     }
     public async Task<Squadron> CreateSquadronAsync(CreateSquadronDto squadronDto)
     {
-        var newSquadron = new Squadron(0, squadronDto.Name, squadronDto.Callsign);
+        var newSquadron = new Squadron
+        {
+            Name = squadronDto.Name,
+            Callsign = squadronDto.Callsign
+        };
+
         return await _squadronRepository.CreateAsync(newSquadron);
     }
     public async Task<Squadron?> UpdateSquadronAsync(int id, UpdateSquadronDto squadronDto)
@@ -37,12 +42,9 @@ public class SquadronService : ISquadronService
         {
             return null;
         }
-        var updateSquadron = existingSquadron with
-        {
-            Name = squadronDto.Name,
-            Callsign = squadronDto.Callsign
-        };
-        await _squadronRepository.UpdateAsync(updateSquadron);
-        return updateSquadron;
+        existingSquadron.Name = squadronDto.Name;
+        existingSquadron.Callsign = squadronDto.Callsign;
+        await _squadronRepository.SaveChangesAsync();
+        return existingSquadron;
     }
 }
