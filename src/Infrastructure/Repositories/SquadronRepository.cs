@@ -32,5 +32,9 @@ namespace _132ndWebsite.Infrastructure.Repositories
         {
             return await _context.SaveChangesAsync();
         }
+        public void Delete(Squadron squadron)
+        {
+            _context.Squadrons.Remove(squadron);
+        }
     }
 }

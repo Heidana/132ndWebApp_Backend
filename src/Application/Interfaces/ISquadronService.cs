@@ -9,4 +9,5 @@ public interface ISquadronService
     Task<Squadron?> GetSquadronByIdAsync(int id);
     Task<Squadron> CreateSquadronAsync(CreateSquadronDto squadronDto);
     Task<Squadron?> UpdateSquadronAsync(int id, UpdateSquadronDto squadronDto);
+    Task<bool> DeleteSquadronAsync(int id);
 }

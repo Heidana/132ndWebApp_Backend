@@ -50,6 +50,16 @@ public static class SquadronEndpoints
         .WithName("UpdateSquadron")
         .Produces<Squadron>(StatusCodes.Status200OK)
         .Produces(StatusCodes.Status404NotFound);
+
+        // DELETE squadron by ID
+        group.MapDelete("/{id:int}", async (ISquadronService squadronService, int id) =>
+        {
+            var success = await squadronService.DeleteSquadronAsync(id);
+            return success ? Results.NoContent() : Results.NotFound();
+        })
+        .WithName("DeleteSquadron")
+        .Produces(StatusCodes.Status204NoContent)
+        .Produces(StatusCodes.Status404NotFound);
     }
 }
 

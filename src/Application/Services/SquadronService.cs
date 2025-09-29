@@ -47,4 +47,16 @@ public class SquadronService : ISquadronService
         await _squadronRepository.SaveChangesAsync();
         return existingSquadron;
     }
+    public async Task<bool> DeleteSquadronAsync(int id)
+    {
+        var squadronToDelete = await _squadronRepository.GetByIdAsync(id);
+        if (squadronToDelete is null)
+        {
+            return false;
+        }
+        _squadronRepository.Delete(squadronToDelete);
+        await _squadronRepository.SaveChangesAsync();
+        
+        return true;
+    }
 }
