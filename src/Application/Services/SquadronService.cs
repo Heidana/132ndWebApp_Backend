@@ -26,8 +26,23 @@ public class SquadronService : ISquadronService
         return await _squadronRepository.GetByIdAsync(id);
     }
     public async Task<Squadron> CreateSquadronAsync(CreateSquadronDto squadronDto)
+    {
+        var newSquadron = new Squadron(0, squadronDto.Name, squadronDto.Callsign);
+        return await _squadronRepository.CreateAsync(newSquadron);
+    }
+    public async Task<Squadron?> UpdateSquadronAsync(int id, UpdateSquadronDto squadronDto)
+    {
+        var existingSquadron = await _squadronRepository.GetByIdAsync(id);
+        if (existingSquadron is null)
         {
-            var newSquadron = new Squadron(0, squadronDto.Name, squadronDto.Callsign);
-            return await _squadronRepository.CreateAsync(newSquadron);
+            return null;
         }
+        var updateSquadron = existingSquadron with
+        {
+            Name = squadronDto.Name,
+            Callsign = squadronDto.Callsign
+        };
+        await _squadronRepository.UpdateAsync(updateSquadron);
+        return updateSquadron;
+    }
 }

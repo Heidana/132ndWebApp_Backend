@@ -12,6 +12,7 @@ public static class SquadronEndpoints
     {
         var group = app.MapGroup("/api/squadrons");
 
+        // GET all squadrons
         group.MapGet("/", async (ISquadronService squadronService) =>
         {
             var squadrons = await squadronService.GetAllSquadronsAsync();
@@ -20,6 +21,7 @@ public static class SquadronEndpoints
         .WithName("GetAllSquadrons")
         .Produces<IEnumerable<Squadron>>(StatusCodes.Status200OK);
 
+        // GET squadron by ID
         group.MapGet("/{id:int}", async (ISquadronService squadronService, int id) =>
         {
             var squadron = await squadronService.GetSquadronByIdAsync(id);
@@ -28,7 +30,8 @@ public static class SquadronEndpoints
         .WithName("GetSquadronById")
         .Produces<Squadron>(StatusCodes.Status200OK)
         .Produces(StatusCodes.Status404NotFound);
-        
+
+        // POST create new squadron
         group.MapPost("/", async (ISquadronService squadronService, CreateSquadronDto squadronDto) =>
         {
             var createdSquadron = await squadronService.CreateSquadronAsync(squadronDto);
@@ -37,6 +40,16 @@ public static class SquadronEndpoints
         .WithName("CreateSquadron")
         .Produces<Squadron>(StatusCodes.Status201Created)
         .Produces(StatusCodes.Status400BadRequest);
+
+        // PUT update existing squadron
+        group.MapPut("/{id:int}", async (ISquadronService squadronService, int id, UpdateSquadronDto squadronDto) =>
+        {
+            var updatedSquadron = await squadronService.UpdateSquadronAsync(id, squadronDto);
+            return updatedSquadron is not null ? Results.Ok(updatedSquadron) : Results.NotFound();
+        })
+        .WithName("UpdateSquadron")
+        .Produces<Squadron>(StatusCodes.Status200OK)
+        .Produces(StatusCodes.Status404NotFound);
     }
 }
 

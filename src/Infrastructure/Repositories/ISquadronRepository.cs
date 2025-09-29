@@ -7,5 +7,6 @@ namespace _132ndWebsite.Infrastructure.Repositories
         Task<IEnumerable<Squadron>> GetAllAsync();
         Task<Squadron?> GetByIdAsync(int id);
         Task<Squadron> CreateAsync(Squadron squadron);
+        Task UpdateAsync(Squadron squadron);
     }
 }

@@ -8,4 +8,5 @@ public interface ISquadronService
     Task<IEnumerable<Squadron>> GetAllSquadronsAsync();
     Task<Squadron?> GetSquadronByIdAsync(int id);
     Task<Squadron> CreateSquadronAsync(CreateSquadronDto squadronDto);
+    Task<Squadron?> UpdateSquadronAsync(int id, UpdateSquadronDto squadronDto);
 }
