@@ -33,8 +33,11 @@ public class SquadronService : ISquadronService
             Callsign = squadronDto.Callsign
         };
 
-        return await _squadronRepository.CreateAsync(newSquadron);
-    }
+        await _squadronRepository.CreateAsync(newSquadron);
+        await _squadronRepository.SaveChangesAsync(); // Commit the changes
+        
+        return newSquadron; // Return the created object
+    }  
     public async Task<Squadron?> UpdateSquadronAsync(int id, UpdateSquadronDto squadronDto)
     {
         var existingSquadron = await _squadronRepository.GetByIdAsync(id);

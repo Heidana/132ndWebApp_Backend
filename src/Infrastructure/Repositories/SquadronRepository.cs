@@ -22,16 +22,17 @@ namespace _132ndWebsite.Infrastructure.Repositories
         {
             return await _context.Squadrons.FindAsync(id);
         }
-        public async Task<Squadron> CreateAsync(Squadron squadron)
+
+        public async Task CreateAsync(Squadron squadron)
         {
             await _context.Squadrons.AddAsync(squadron);
-            await _context.SaveChangesAsync();
-            return squadron;
         }
+
         public async Task<int> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync();
         }
+
         public void Delete(Squadron squadron)
         {
             _context.Squadrons.Remove(squadron);
