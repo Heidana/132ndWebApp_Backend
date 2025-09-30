@@ -67,8 +67,6 @@ The project is organized into four main projects, following the principles of Cl
 
 ## API Endpoints
 
-The API is documented using Swagger (OpenAPI). You can access the Swagger UI by running the API project and navigating to `/swagger` in your browser.
-
 The following endpoints are available for the `Squadron` resource:
 
 *   **`GET /api/squadrons`**: Get all squadrons.
